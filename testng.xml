@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+<listeners>
+<listener class-name="pageObjectModel.automation.listner.Listner"></listener>
+</listeners>
+  <test name="Registration2">
+    <classes>
+      <class name="pageObjectModel.automation.testScripts.registrationPage.RegistrationTest2"/>
+    </classes>
+  </test> <!-- Test -->
+  
+    <test name="Registration3">
+    <classes>
+      <class name="pageObjectModel.automation.testScripts.registrationPage.RegistrationTest3"/>
+    </classes>
+  </test> <!-- Test -->
+  
+    <test name="Registration4">
+    <classes>
+      <class name="pageObjectModel.automation.testScripts.registrationPage.RegistrationTest4"/>
+    </classes>
+  </test> <!-- Test -->
+
+</suite> <!-- Suite -->
