@@ -50,8 +50,7 @@ public class TestBase {
 
 	public void init() throws IOException {
 		System.out.println(System.getProperty("user.dir"));
-		extent = new ExtentReports(
-				System.getProperty("user.dir") + "/src/test/java/pageObjectModel/automation/reports/test.html", false);
+		extent = new ExtentReports(System.getProperty("user.dir") + "/src/test/java/pageObjectModel/automation/reports/test.html", false);
 		loadPropertiesFile();
 		selectBrowser(Repository.getProperty("browser"));
 		driver.get(Repository.getProperty("url"));
@@ -73,13 +72,13 @@ public class TestBase {
 	 */
 	public void selectBrowser(String browser) {
 		if (browser.equals("firefox") || browser.equals("FIREFOX")) {
-			this.driver = new FirefoxDriver();
+			driver = new FirefoxDriver();
 			driver.manage().window().maximize();
 		} else if (browser.equals("chrome") || browser.equals("CHROME")) {
 			System.out.println("chrome browser");
 			System.setProperty("webdriver.chrome.driver",
 					System.getProperty("user.dir") + "\\src\\com\\actiTime\\BrowserDrivers\\chromedriver.exe");
-			this.driver = new ChromeDriver();
+			driver = new ChromeDriver();
 			driver.manage().window().maximize();
 		} else if (browser.equals("ie") || browser.equals("IE")) {
 			this.driver = new InternetExplorerDriver();
@@ -142,7 +141,6 @@ public class TestBase {
 		Data = new Excel_Reader(
 				System.getProperty("user.dir") + "//src//main//java//pageObjectModel//automation//data//" + ExcelName);
 		int rowNum = Data.getRowCount(testcase);
-		System.out.println(rowNum);
 		int colNum = Data.getColumnCount(testcase);
 		Object sampleData[][] = new Object[rowNum - 1][colNum];
 		for (int i = 2; i <= rowNum; i++) {
@@ -255,22 +253,22 @@ public class TestBase {
 
 	}
 
-	public String captureScreen() {
-		TakesScreenshot oScn = (TakesScreenshot) driver;
-		File oScnShot = oScn.getScreenshotAs(OutputType.FILE);
+	public String captureScreen(String fileName) {
+		TakesScreenshot screenshot = (TakesScreenshot) driver;
+		File oScnShot = screenshot.getScreenshotAs(OutputType.FILE);
 		
 		String userDirector = System.getProperty("user.dir");
 		String customeLocation = "//src//test//java//pageObjectModel//automation//screenshots//";
 		String failureImageFileName = userDirector + customeLocation
 				+ new SimpleDateFormat("MM-dd-yyyy_HH-ss").format(new GregorianCalendar().getTime()) + "-"
 				+ ".png";
-		
-		File oDest = new File(failureImageFileName);
+		String failureImageFileName1 = userDirector + customeLocation+fileName+ ".png";
+		File oDest = new File(failureImageFileName1);
 		try {
 			FileUtils.copyFile(oScnShot, oDest);
 		} catch (IOException e) {
 		}
 		System.out.println(failureImageFileName);
-		return failureImageFileName;
+		return failureImageFileName1;
 	}
 }

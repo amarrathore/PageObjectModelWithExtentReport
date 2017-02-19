@@ -44,7 +44,7 @@ public class RegistrationTest4 extends TestBase {
 	public void testRegistration2() throws InterruptedException {
 		test = extent.startTest("Registration2 Test", "Test Registration with valid data");
 		RegistrationPage registor = new RegistrationPage(driver,test);
-		registor.register(emailAddress, userName, passowrd, selectDay, selectMonth, selectYear, firstName, lastName, address);
+		//registor.register(emailAddress, userName, passowrd, selectDay, selectMonth, selectYear, firstName, lastName, address);
 	}
 
 
