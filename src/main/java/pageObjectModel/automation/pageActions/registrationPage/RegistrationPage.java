@@ -88,12 +88,28 @@ public class RegistrationPage extends TestBase {
 	
 	@FindBy(id="customer_firstname")
 	WebElement customerfirstName;
+	
+	@FindBy(className="logout")
+	WebElement logout;
 
 	public RegistrationPage(WebDriver driver, ExtentTest test) {
 		// This initElements method will create all WebElements
 		this.driver = driver;
 		this.test = test;
 		PageFactory.initElements(this.driver, this);
+	}
+	
+	public boolean clickOnLogout(){
+		try {
+			logout.isDisplayed();
+			logout.click();
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println("-----------");
+           return false;
+		}
+		
 	}
 
 	public void setEmail(String emailAddress) {
@@ -138,9 +154,9 @@ public class RegistrationPage extends TestBase {
 		try {
 			registor.click();
 			test.log(LogStatus.PASS, "clicked on Registration");
-			test.log(LogStatus.PASS,test.addScreenCapture(captureScreen("clickOnRegistor")));
+			//test.log(LogStatus.PASS,test.addScreenCapture(captureScreen("clickOnRegistor")));
 		} catch (Exception e) {
-			test.addScreenCapture(captureScreen("clickOnRegistor"));
+			//test.addScreenCapture(captureScreen("clickOnRegistor"));
 			test.log(LogStatus.FAIL, "clicked on Registration");
 		}
 	}
@@ -258,7 +274,7 @@ public class RegistrationPage extends TestBase {
 	
 
 
-	public String register(String emailAddress, String userName, String passowrd, String selectDay, String selectMonth,
+	public String register(String emailAddress,String passowrd, String selectDay, String selectMonth,
 			String selectYear, String customerfirstName,String customerLastName, String firstName, String lastName, String address) throws InterruptedException {
 		try {
 			clickOnLogin();
@@ -279,22 +295,25 @@ public class RegistrationPage extends TestBase {
 			postcode.sendKeys("90001");
 			phone_mobile.sendKeys("9999999999");
 			alias.sendKeys("Test Address");
-			test.log(LogStatus.PASS,test.addScreenCapture(captureScreen("registerInputData")));
+			//test.log(LogStatus.PASS,test.addScreenCapture(captureScreen("registerInputData")));
 			submitAccount.click();
 			String text = accountCreationMessage.getText();
 			return text;
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Registration script failed",e);
+			return e.getMessage();
 		}
 		catch(AssertionError e){
 			test.log(LogStatus.FAIL, "Registration script failed",e);
 			test.log(LogStatus.FAIL,test.addScreenCapture(captureScreen("registerFailed")));
+			return e.getMessage();
 		}
-		return "registration was not successful";
+		//return "registration was not successful";
 
 	}
 	
 	public void verifyRegistorMessage(String expectedmsg,String actualMessage){
+		System.out.println("expectedmsg is :-"+expectedmsg+" actualMessage is:-"+actualMessage);
 		Assert.assertEquals(actualMessage,expectedmsg);
 	}
 

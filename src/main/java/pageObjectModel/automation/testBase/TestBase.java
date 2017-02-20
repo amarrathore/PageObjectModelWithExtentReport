@@ -54,7 +54,6 @@ public class TestBase {
 		loadPropertiesFile();
 		selectBrowser(Repository.getProperty("browser"));
 		driver.get(Repository.getProperty("url"));
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
 	public void loadPropertiesFile() throws IOException {
@@ -271,4 +270,13 @@ public class TestBase {
 		System.out.println(failureImageFileName);
 		return failureImageFileName1;
 	}
+	
+	public void fnHighlightMe(WebDriver driver,WebElement element) throws InterruptedException{
+		  //Creating JavaScriptExecuter Interface
+		   JavascriptExecutor js = (JavascriptExecutor)driver;
+		      //Execute javascript
+		         js.executeScript("arguments[0].style.border='4px solid yellow'", element);
+		         Thread.sleep(3000);
+		         js.executeScript("arguments[0].style.border=''", element);
+		   }
 }
