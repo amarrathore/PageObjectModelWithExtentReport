@@ -40,20 +40,20 @@ public class RegistrationTest2 extends TestBase {
 	public void setUp() throws IOException {
 		init();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		test = extent.startTest("Registration Test", "Test Registration with valid data");
-		reg = new RegistrationPage(driver, test);
+
+		
 
 	}
 
 	@Test(priority = 0, enabled = true, description = "Test Registration with valid data", dataProvider = "TestRegistor")
-	public void testRegistration(String passowrd, String selectDay, String selectMonth,
-			String selectYear, String customerfirstName, String customerLastName, String firstName, String lastName,
-			String address, String verify, String runmode) throws InterruptedException, IOException {
+	public void testRegistration(String passowrd, String selectDay, String selectMonth, String selectYear,
+			String customerfirstName, String customerLastName, String firstName, String lastName, String address,
+			String verify, String runmode) throws InterruptedException, IOException {
 		String emailAddress = "email" + System.currentTimeMillis() + "@gmail.com";
+		test = extent.startTest("Registration Test", "Test Registration with valid data");
+		reg = new RegistrationPage(driver, test);
 		
-		
-		//driver.get(Repository.getProperty("url"));
-        reg.clickOnLogout();
+		reg.clickOnLogout();
 		i++;
 		BigDecimal bigdecimal = new BigDecimal(selectDay);
 		BigDecimal bigdecimal1 = new BigDecimal(selectYear);
@@ -65,32 +65,20 @@ public class RegistrationTest2 extends TestBase {
 		if (runmode.equalsIgnoreCase("n")) {
 			throw new SkipException("user has marred run mode n for this record");
 		}
-
-
-		// userName = userName+System.currentTimeMillis();
-		String message = reg.register(emailAddress,passowrd, sDay, selectMonth, year,
-				customerfirstName, customerLastName, firstName, lastName, address);
-		System.out.println("message----"+message);
+		String message = reg.register(emailAddress, passowrd, sDay, selectMonth, year, customerfirstName,
+				customerLastName, firstName, lastName, address);
+		System.out.println("message----" + message);
 		try {
 			reg.verifyRegistorMessage(verify, message);
 			test.log(LogStatus.PASS, "registration is successfule");
+			extent.endTest(test);
+			extent.flush();
 			Assert.assertTrue(true, "Registration passed");
-		} catch (Exception e) {
+		} catch (AssertionError e) {
 			test.log(LogStatus.FAIL, "Registration script failed", e);
-			test.log(LogStatus.FAIL, test.addScreenCapture(captureScreen("registerFailed" + i)));
-			Assert.assertTrue(false, "Registration failed");
-		}
-
-		catch (AssertionError e) {
-			System.out.println(e.getLocalizedMessage());
-			if (e.getLocalizedMessage().contains("Welcome123")) {
-				test.log(LogStatus.PASS, "Registration script failed", e);
-				Assert.assertTrue(true, "Registration passed");
-			} else {
-				test.log(LogStatus.FAIL, test.addScreenCapture(captureScreen("registerPASSED" + i)));
-				Assert.assertTrue(false, "Registration failed");
-			}
-
+			extent.endTest(test);
+			extent.flush();
+			Assert.assertTrue(false, "Registration passed");
 		}
 	}
 

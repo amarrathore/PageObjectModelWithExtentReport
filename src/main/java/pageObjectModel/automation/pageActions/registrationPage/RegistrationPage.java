@@ -300,15 +300,8 @@ public class RegistrationPage extends TestBase {
 			String text = accountCreationMessage.getText();
 			return text;
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Registration script failed",e);
-			return e.getMessage();
 		}
-		catch(AssertionError e){
-			test.log(LogStatus.FAIL, "Registration script failed",e);
-			test.log(LogStatus.FAIL,test.addScreenCapture(captureScreen("registerFailed")));
-			return e.getMessage();
-		}
-		//return "registration was not successful";
+		return "registration was not successful";
 
 	}
 	
