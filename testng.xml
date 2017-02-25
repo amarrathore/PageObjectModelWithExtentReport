@@ -9,17 +9,4 @@
       <class name="pageObjectModel.automation.testScripts.registrationPage.RegistrationTest2"/>
     </classes>
   </test> <!-- Test -->
-  
-    <test name="Registration3">
-    <classes>
-      <class name="pageObjectModel.automation.testScripts.registrationPage.RegistrationTest3"/>
-    </classes>
-  </test> <!-- Test -->
-  
-    <test name="Registration4">
-    <classes>
-      <class name="pageObjectModel.automation.testScripts.registrationPage.RegistrationTest4"/>
-    </classes>
-  </test> <!-- Test -->
-
 </suite> <!-- Suite -->

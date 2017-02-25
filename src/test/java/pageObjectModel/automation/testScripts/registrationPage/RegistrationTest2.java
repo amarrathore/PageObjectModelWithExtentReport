@@ -50,6 +50,8 @@ public class RegistrationTest2 extends TestBase {
 			String customerfirstName, String customerLastName, String firstName, String lastName, String address,
 			String verify, String runmode) throws InterruptedException, IOException {
 		String emailAddress = "email" + System.currentTimeMillis() + "@gmail.com";
+		
+		
 		test = extent.startTest("Registration Test", "Test Registration with valid data");
 		reg = new RegistrationPage(driver, test);
 		

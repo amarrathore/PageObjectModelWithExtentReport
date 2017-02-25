@@ -50,7 +50,7 @@ public class TestBase {
 
 	public void init() throws IOException {
 		System.out.println(System.getProperty("user.dir"));
-		extent = new ExtentReports(System.getProperty("user.dir") + "/src/test/java/pageObjectModel/automation/reports/test.html", false);
+		extent = new ExtentReports(System.getProperty("user.dir") + "/src/test/java/pageObjectModel/automation/reports/test"+System.currentTimeMillis()+".html", false);
 		loadPropertiesFile();
 		selectBrowser(Repository.getProperty("browser"));
 		driver.get(Repository.getProperty("url"));

@@ -307,6 +307,7 @@ public class RegistrationPage extends TestBase {
 	
 	public void verifyRegistorMessage(String expectedmsg,String actualMessage){
 		System.out.println("expectedmsg is :-"+expectedmsg+" actualMessage is:-"+actualMessage);
+		test.log(LogStatus.PASS,test.addScreenCapture(captureScreen("registerInputData")));
 		Assert.assertEquals(actualMessage,expectedmsg);
 	}
 
