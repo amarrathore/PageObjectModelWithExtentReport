@@ -1,5 +1,6 @@
 package pageObjectModel.automation.testScripts.registrationPage;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
@@ -51,6 +52,9 @@ public class RegistrationTest2 extends TestBase {
 			String verify, String runmode) throws InterruptedException, IOException {
 		String emailAddress = "email" + System.currentTimeMillis() + "@gmail.com";
 		
+		if (runmode.equalsIgnoreCase("n")) {
+			throw new SkipException("user has marred run mode n for this record");
+		}
 		
 		test = extent.startTest("Registration Test", "Test Registration with valid data");
 		reg = new RegistrationPage(driver, test);
@@ -64,22 +68,24 @@ public class RegistrationTest2 extends TestBase {
 		System.out.println(sDay);
 		String year = String.valueOf(bigdecimal1.longValue());
 
-		if (runmode.equalsIgnoreCase("n")) {
-			throw new SkipException("user has marred run mode n for this record");
-		}
+		
 		String message = reg.register(emailAddress, passowrd, sDay, selectMonth, year, customerfirstName,
 				customerLastName, firstName, lastName, address);
+		
+		
 		System.out.println("message----" + message);
 		try {
 			reg.verifyRegistorMessage(verify, message);
 			test.log(LogStatus.PASS, "registration is successfule");
 			extent.endTest(test);
 			extent.flush();
+			updateResult(i, "Registration With Valid Data", "Pass", "Registration Test");
 			Assert.assertTrue(true, "Registration passed");
 		} catch (AssertionError e) {
 			test.log(LogStatus.FAIL, "Registration script failed", e);
 			extent.endTest(test);
 			extent.flush();
+			updateResult(i, "Registration With InValid Assertion", "Fail", "Registration Test");
 			Assert.assertTrue(false, "Registration passed");
 		}
 	}

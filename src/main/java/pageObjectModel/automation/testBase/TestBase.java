@@ -190,7 +190,7 @@ public class TestBase {
 		String userDirector = System.getProperty("user.dir");
 
 		String resultFile = userDirector
-				+ "//src//test//java//com//companyname//projectname//report//TestHtmlReport.html";
+				+ "//src//test//java//pageObjectModel//automation//reports//TestHtmlReport.html";
 
 		File file = new File(resultFile);
 		System.out.println(file.exists());

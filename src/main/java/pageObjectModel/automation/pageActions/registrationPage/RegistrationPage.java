@@ -266,6 +266,7 @@ public class RegistrationPage extends TestBase {
 	public void selectState() {
 		try {
 			new Select(state).getOptions().get(6).click();
+			//expliciteWait(driver.findElement(By.xpath("")), 50);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
